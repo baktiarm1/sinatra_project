@@ -1,7 +1,7 @@
 
 
 require 'bundler/setup'
-Bundler.require(:default, ENV['SINATRA_ENV'])
+Bundler.require
 
 require_all 'app'
 
