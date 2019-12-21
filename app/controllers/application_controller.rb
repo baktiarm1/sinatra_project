@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
   end
 
     get '/' do
-        erb :index
+      erb :index
     end
 
   get '/signup' do
@@ -32,8 +32,8 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
-    session[:user_id] = user.id
+    @user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+    session[:user_id] = @user.id
 
     redirect to '/journal_entries'
   end
@@ -67,5 +67,6 @@ class ApplicationController < Sinatra::Base
           redirect to '/'
         end
       end
+
 
 end
