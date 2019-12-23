@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
      if Helpers.is_logged_in?(session)
-         redirect to '/journal_entries'
+         redirect to '/index_entries'
      end
 
      erb :"/users/create_user"
@@ -35,12 +35,12 @@ class ApplicationController < Sinatra::Base
     user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
     session[:user_id] = user.id
 
-    redirect to '/journal_entries'
+    redirect to '/new_journal_entry'
   end
 
   get '/login' do
       if Helpers.is_logged_in?(session)
-        redirect to '/journal_entries'
+        redirect to '/new_journal_entry'
       end
 
       erb :"/users/login"
@@ -52,7 +52,7 @@ class ApplicationController < Sinatra::Base
 
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect to '/journal_entries'
+          redirect to '/new_journal_entry'
         else
           flash[:login_error] = "Incorrect login. Please try again."
           redirect to '/login'

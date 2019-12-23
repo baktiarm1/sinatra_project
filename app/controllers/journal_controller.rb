@@ -15,4 +15,16 @@ class JournalController < ApplicationController
     erb :"journal/journal_entries"
   end
 
+  get '/create_journal_entry' do
+    erb :"journal/create_journal_entry"
+  end
+
+  post '/show_entry' do
+    @entry = Entry.create(:country => params["country"], :content => params["content"])
+
+    redirect to erb :'/journal/show_entry'
+  end
+
+
+
 end
