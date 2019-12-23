@@ -35,12 +35,12 @@ class ApplicationController < Sinatra::Base
     user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
     session[:user_id] = user.id
 
-    redirect to '/new_entry'
+    redirect to '/entry/new'
   end
 
   get '/login' do
       if Helpers.is_logged_in?(session)
-        redirect to '/new_entry'
+        redirect to '/entry/new'
       end
 
       erb :"/users/login"
@@ -52,7 +52,7 @@ class ApplicationController < Sinatra::Base
 
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect to '/new_entry'
+          redirect to '/entry/new'
         else
           flash[:login_error] = "Incorrect login. Please try again."
           redirect to '/login'

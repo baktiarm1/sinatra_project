@@ -18,14 +18,16 @@ class JournalController < ApplicationController
   get 'user/journal_entries' do 
     @entries = current_user.entries
     erb :'journal/index_entries'
+  end 
 
   get '/entry/new' do
     erb :"journal/new_entry"
   end
 
   post '/journal_entries' do
-    #@entry = Entry.create(:country => params["country"], :content => params["content"])
-    @entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
+     #@entries = Entry.create(params)
+    @entries = Entry.create(:country => params["country"], :content => params["content"])
+    #@entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
     @entries.save
     redirect to "/journal_entries"
   end
@@ -33,6 +35,7 @@ class JournalController < ApplicationController
   get 'journal_entries/:id' do 
     @entries = Entry.find_by_id(params[:id])
     erb :'journal/show_entry'
+  end 
 
   get 'journal_entries/:id/edit' do 
     @entries = Entry.find_by_id(params[:id])
@@ -65,5 +68,4 @@ class JournalController < ApplicationController
       end 
     end 
 
-
-end
+end 

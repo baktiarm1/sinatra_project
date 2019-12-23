@@ -1,13 +1,15 @@
 
  <h1>Welcome to your Journal Index page</h1>
 
-# <%= @entries.country %>
-# <br>
-# <br>
-
-# <ul>
-#   <li><h3><%= @entries.country %></h3>
-#     <p><%= @entries.content %>
-#     </li>
-#   </p>
-# </ul>
+<ol> 
+<% @entries.each do |entries| %> 
+  <li> 
+  <%= entries.country %> 
+  </a> 
+  <p><%= entries.content %> <br> 
+  <% if entries.user == current_user %> 
+   <a href="/journal_entries/<%=entries.id%>/edit">EDIT</a>
+   <%end%> 
+   </li> 
+   <%end%>
+   </ol>
