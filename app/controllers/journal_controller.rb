@@ -11,6 +11,13 @@ class JournalController < ApplicationController
   #   end
   # end
 
+  post '/show_entry' do 
+    @entries = Entry.create(:country => params["country"], :content => params["content"])
+    #@entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
+    @entries.save
+    erb :"journal/show_entry"
+  end 
+
   get '/journal_entries' do
     erb :"journal/index_entries"
   end
