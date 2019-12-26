@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<center><h1>Create a Journal Entry</h1>
+
+<body class="home-page-bg">
+<div class="home-page-container">
+ <div class="text-center">
+
+<h1 class="display-3">Create a Journal Entry</h1>
 
 
 
-<form action="/show_entry" method="POST">
-  <p>
+<form action="/journal_entries" method="POST">
+  <p style='color:white;'>
     Write down the thoughts of your travels<br><br>
-    Country:<input type="text" name="country" />
+    Country:<br>
+    <input type="text" name="country" />
   </p>
 
   <p>
@@ -14,4 +20,7 @@
   <textarea name="content"></textarea>
   </p>
   <input type="submit" />
-</form></center>
+</form>
+</div>
+</div>
+</body>

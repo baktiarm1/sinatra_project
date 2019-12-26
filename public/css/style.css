@@ -1,0 +1,25 @@
+.home-page-bg { 
+    background-image:url('/img/TravelJournal.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.home-page-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-3 {
+    color: white;
+    justify-content: center;
+}
+
+.lead { 
+    color:white;
+}
+
+h1, p {
+    color: white;
+}
