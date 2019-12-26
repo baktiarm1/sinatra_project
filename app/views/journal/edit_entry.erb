@@ -1,0 +1,22 @@
+<h1>Edit <%= @entries.country %></h1>
+
+<form action="/journal_entries/<%= @entries.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <p>
+    <input type="text" name="country" value="<%= @entries.country %>"/>
+  </p>
+
+  <p>
+    <textarea name="content"><%= @entries.content %></textarea>
+  </p>
+
+
+  <input type="submit" id="submit" />
+</form>
+
+<p>
+  <form action="/joural_entries/<%= @entries.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete">
+</form>
+</p>

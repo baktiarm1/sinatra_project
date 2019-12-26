@@ -1,15 +1,12 @@
 
+
+<body class="index-page-bg">
+  <div class="home-page-container">
+    <div class="text-center">
  <h1>Welcome to your Journal Index page</h1>
 
-<ol> 
-<% @entries.each do |entries| %> 
-  <li> 
-  <%= entries.country %> 
-  </a> 
-  <p><%= entries.content %> <br> 
-  <% if entries.user == current_user %> 
-   <a href="/journal_entries/<%=entries.id%>/edit">EDIT</a>
-   <%end%> 
-   </li> 
-   <%end%>
-   </ol>
+
+
+      </div>
+    </div>
+  </body>
