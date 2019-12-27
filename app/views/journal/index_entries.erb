@@ -5,18 +5,22 @@
     <div class="text-center">
  <h1>Welcome to your Journal Index page</h1>
 
+
+
+
 <ol>
 <% @entries.each do |entries| %>
 <li>
 <%= entries.country %>
 </a>
 <p><%= entries.content %> <br>
-<% if entries.user == current_user %>
+<%# <% if user.id == current_user %> 
 <a href="/journal_entries/<%=entries.id%>/edit">EDIT</a>
-<%end%>
+<%# <%end%> 
 </li>
 <%end%>
 </ol>
+
 
       </div>
     </div>

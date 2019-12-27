@@ -1,41 +1,49 @@
 class JournalController < ApplicationController
 
   # get '/journal_entries' do
-  #
-  #   if Helpers.is_logged_in?
-  #     @user = current_user
-  #     erb :"journal/journal_entries"
+  
+  #   if Helpers.is_logged_in?(session)
+  #     # user = current_user
+  #     erb :"journal/index_entries"
   #   else
   #     flash[:login] = "You need to be logged in to get to this page"
   #     redirect to '/login'
   #   end
   # end
 
+
   post '/show_entry' do 
-    @entries = Entry.create(:country => params["country"], :content => params["content"])
-    #@entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
-    @entries.save
+    entries = Entry.new(:country => params["country"], :content => params["content"])
+    entries.save
+    # @entries = Entry.all
     erb :"journal/show_entry"
   end 
 
-  get '/journal_entries' do
-    erb :"journal/index_entries"
-  end
+ 
 
-  get 'user/journal_entries' do 
-    @entries = current_user.entries
-    erb :'journal/index_entries'
-  end 
+  # get 'user/journal_entries' do 
+  #   @entries = current_user.entries
+  #   erb :'journal/index_entries'
+  # end 
+
+  
 
   get '/entry/new' do
     erb :"journal/new_entry"
   end
 
+ 
+   get '/journal_entries' do
+    @entries = Entry.all
+    erb :"journal/index_entries"
+  end
+
   post '/journal_entries' do
      #@entries = Entry.create(params)
-    @entries = Entry.create(:country => params["country"], :content => params["content"])
+    entries = Entry.new(:country => params["country"], :content => params["content"])
     #@entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
-    @entries.save
+    entries.save
+    # @entries = Entry.all
     redirect to "/journal_entries"
   end
 
