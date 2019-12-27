@@ -1,12 +1,12 @@
 
 
 <body class="index-page-bg">
-  <div class="home-page-container">
-    <div class="text-center">
+   
  <h1>Welcome to your Journal Index page</h1>
 
-
-
+<div>
+<h2><a href="/new_entry">CREATE NEW ENTRY</a></h2><br><br>
+</div>
 
 <ol>
 <% @entries.each do |entries| %>
@@ -15,13 +15,14 @@
 </a>
 <p><%= entries.content %> <br>
 <%# <% if user.id == current_user %> 
+
 <a href="/journal_entries/<%=entries.id%>/edit">EDIT</a>
 <%# <%end%> 
 </li>
 <%end%>
+
 </ol>
 
 
-      </div>
-    </div>
+
   </body>

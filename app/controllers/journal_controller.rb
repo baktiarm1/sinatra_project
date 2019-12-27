@@ -28,7 +28,7 @@ class JournalController < ApplicationController
 
   
 
-  get '/entry/new' do
+  get '/new_entry' do
     erb :"journal/new_entry"
   end
 
@@ -48,7 +48,8 @@ class JournalController < ApplicationController
   end
 
   get 'journal_entries/:id' do 
-    @entries = Entry.find_by_id(params[:id])
+    
+   @entries = Entry.find_by(params[:id])
     erb :'journal/show_entry'
   end 
 
@@ -82,5 +83,15 @@ class JournalController < ApplicationController
         redirect to "/journal_entries"
       end 
     end 
+
+  private
+
+  def set_entry
+    @entries = Entry.find_by(params[:id])
+    # unless @entries 
+    #   puts "#{params[:id] is not valid post"
+    #   redirect '/'
+    # end 
+  end 
 
 end 
