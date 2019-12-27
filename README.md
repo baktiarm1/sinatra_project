@@ -12,6 +12,9 @@ Write your thoughts on the places you've visited during your travels
 5.Run Shotgun
 6.Sign up and start your journal
 
+# Images
+Background images from https://unsplash.com
+
 ## License
 
 The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
