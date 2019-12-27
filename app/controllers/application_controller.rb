@@ -17,29 +17,37 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
      if Helpers.is_logged_in?(session)
-         redirect to '/index_entries'
+         redirect to '/journal_entries'
      end
 
      erb :"/users/create_user"
   end
 
   post '/signup' do
+
     params.each do |label, input|
       if input.empty?
         flash[:new_user_error] = "Please enter a value for #{label}"
         redirect to '/signup'
       end
+
+      if User.find_by(:email => params['email'])
+        flash[:account_taken] = "The email you provided is already in our system. Please enter a new email or log in to continue."
+      redirect to '/signup'
+      end
+
+
     end
 
     user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
     session[:user_id] = user.id
 
-    redirect to '/entry/new'
+    redirect to '/new_entry'
   end
 
   get '/login' do
       if Helpers.is_logged_in?(session)
-        redirect to '/entry/new'
+        redirect to '/new_entry'
       end
 
       erb :"/users/login"
@@ -51,7 +59,7 @@ class ApplicationController < Sinatra::Base
 
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect to '/entry/new'
+          redirect to '/new_entry'
         else
           flash[:login_error] = "Incorrect login. Please try again."
           redirect to '/login'
