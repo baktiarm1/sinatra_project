@@ -36,7 +36,6 @@ class ApplicationController < Sinatra::Base
       redirect to '/signup'
       end
 
-
     end
 
     user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])

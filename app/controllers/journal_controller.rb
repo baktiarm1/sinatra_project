@@ -12,11 +12,12 @@ class JournalController < ApplicationController
   # end
 
 
-  post '/show_entry' do 
-    entries = Entry.new(:country => params["country"], :content => params["content"])
-    entries.save
+  post '/show_entry/:id' do 
+    @entries = Entry.find_by_id(params[:id])
+    # entries = Entry.new(:country => params["country"], :content => params["content"])
+    # entries.save
     # @entries = Entry.all
-    erb :"journal/show_entry"
+    redirect to "/journal_entries/#{@entries.id}"
   end 
 
  
@@ -29,59 +30,61 @@ class JournalController < ApplicationController
   
 
   get '/new_entry' do
+    @user=Helpers.current_user(session)
     erb :"journal/new_entry"
   end
 
  
    get '/journal_entries' do
-    @entries = Entry.all
+    @entries = Helpers.current_user(session).entries
     erb :"journal/index_entries"
   end
 
   post '/journal_entries' do
      #@entries = Entry.create(params)
-    entries = Entry.new(:country => params["country"], :content => params["content"])
+    entries = Entry.new(:country => params["country"], :content => params["content"], :user_id => params['user_id'])
     #@entries = current_user.entries.build(:country => params[:country],  :content => params[:content])
     entries.save
     # @entries = Entry.all
     redirect to "/journal_entries"
   end
 
-  get 'journal_entries/:id' do 
-    
-   @entries = Entry.find_by(params[:id])
+  get '/journal_entries/:id' do 
+  
+   @entries = Entry.find_by_id(params[:id])
     erb :'journal/show_entry'
   end 
 
-  get 'journal_entries/:id/edit' do 
+  get '/journal_entries/:id/edit' do 
     @entries = Entry.find_by_id(params[:id])
-      if @entries.user != current_user
-        redirect to '/'
-      else 
+      # if @entries.user != current_user
+      #   redirect to '/'
+      # else 
         erb :'journal/edit_entry'
-      end 
+      # end 
     end 
 
-   patch 'journal_entries/:id' do 
+   patch '/journal_entries/:id' do 
     @entries = Entry.find_by_id(params[:id])
-      if @entries.user != current_user
-        redirect to "/"
-      else 
-        @entries.country = params[:title]
+      # if @entries.user != current_user
+      #   redirect to "/"
+      # else 
+        @entries.country = params[:country]
         @entries.content = params[:content]
         @entries.save
-        redirect to "journal_entries/#{@entries.id}"
-      end 
+        redirect to "/journal_entries/#{@entries.id}"
+      # end 
     end 
 
-    delete 'journal_entries/:id' do 
+    delete '/journal_entries/:id' do 
       @entries = Entry.find_by_id(params[:id])
-      if @entries.user != current_user
-        redirect to '/'
-      else 
-        @entry.delete
+      # if @entries.user != current_user
+      #   redirect to '/'
+      # else 
+        @entries.destroy
+        
         redirect to "/journal_entries"
-      end 
+      # end 
     end 
 
   private

@@ -9,6 +9,7 @@
 
 
 <form action="/journal_entries" method="POST">
+    <input id="hidden" type="hidden" name="user_id"  value=<%=@user.id%> />
         <p style='color:white;'>
           Write down the thoughts of your travels<br><br>
           Country:<br>
